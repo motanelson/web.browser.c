@@ -7,7 +7,7 @@
 #define body1 "<BODY"
 #define body2 "<body"
 #define retssimbol '<'
-
+#define retssimbol2 '>'
 int main(){
     char buffer[sizes];
     char buffer2[sizes];
@@ -17,6 +17,7 @@ int main(){
     int n=0;
     int b= true;
     int bb=false;
+    int closesb=false;
     int rect=false;
     printf("\033c\033[43;30m\n\n");
     while(b){
@@ -29,7 +30,10 @@ int main(){
                     if(counter<6){
                         if(counter==5){
                              buffer2[counter]=buffer[n];
-                             if(strncmp(buffer2,body1,5)==0 ||strncmp(buffer2,body2,5)==0 )bb=true;
+                             if(strncmp(buffer2,body1,5)==0 ||strncmp(buffer2,body2,5)==0 ){
+                                 bb=true;
+                                 closesb=false;
+                             }
                         }else{
                              buffer2[counter]=buffer[n];
                         }
@@ -41,7 +45,18 @@ int main(){
                     }
                 counter++;
             }else{
-                printf("%c",buffer[n]);
+                   if(buffer[n]==retssimbol){
+                        
+                        closesb=false;
+                    }
+                    if(buffer[n]==retssimbol2){
+                        
+                        closesb=true;
+                    }
+
+                
+
+                if(closesb) printf("%c",buffer[n]);
             }
         }
         
