@@ -10,6 +10,8 @@
 #define script2 "<script"
 #define script3 "</SCRIPT"
 #define script4 "</script"
+#define href1 "href"
+#define href2 "HREF"
 #define br1 "<BR"
 #define br2 "<br"
 #define p1 "<P"
@@ -18,17 +20,25 @@
 #define pe2 "</p"
 #define retssimbol '<'
 #define retssimbol2 '>'
+#define reth 'h'
+#define reth2 'H'
+#define retas '\"'
 #define sp ' '
 int main(){
     char buffer[sizes];
     char buffer2[sizes];
+    char buffer3[sizes];
     int lens=0;
     int counter=0;
+    int counter3=0;
+    int counter4=0;
     int cursor=0;
     int n=0;
     int b= true;
     int bb=false;
     int bbb=false;
+    int bts=false;
+    int sbts=false;
     int closesb=false;
     int spaces=false;
     int rect=false;
@@ -49,6 +59,7 @@ int main(){
                                  counter=0;
                                  bbb=true;
                                  spaces=true;
+                                 bts=false;
                              }
                         }else{
                              buffer2[counter]=buffer[n];
@@ -105,15 +116,39 @@ int main(){
                    if(buffer[n]==retssimbol){
                         
                         closesb=false;
+                        bts=false;
+                        counter4=0;
                     }
                     if(buffer[n]==retssimbol2){
                         
                         closesb=true;
+                        bts=false;
+                        counter4=0;
                     }
 
                     if(buffer[n]==retssimbol){
                         
                         counter=0;
+                    }
+                    if((buffer[n]==reth || buffer[n]==reth) && !closesb && counter4==0){
+                        
+                        bts=true;
+                        counter3=0;
+                        counter4=0;
+                        sbts=false;
+                    }
+                    if(bts){
+                        if(counter3==4){
+                             buffer3[counter3]=buffer[n];
+                             if(strncmp(buffer3,href1,3)==0 ||strncmp(buffer3,href2,2)==0 ){
+                                 sbts=true;
+                                 
+                             }
+                         }
+                         if(buffer[n]=='\"')counter4++;
+                         if(counter4==1)printf("%c",buffer[n]);
+                         counter3++;
+                       
                     }
 
                 counter++;
