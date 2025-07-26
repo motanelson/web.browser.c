@@ -12,6 +12,7 @@
 #define script4 "</script"
 #define retssimbol '<'
 #define retssimbol2 '>'
+#define sp ' '
 int main(){
     char buffer[sizes];
     char buffer2[sizes];
@@ -23,6 +24,7 @@ int main(){
     int bb=false;
     int bbb=false;
     int closesb=false;
+    int spaces=false;
     int rect=false;
     printf("\033c\033[43;30m\n\n");
     while(b){
@@ -40,6 +42,7 @@ int main(){
                                  closesb=false;
                                  counter=0;
                                  bbb=true;
+                                 spaces=true;
                              }
                         }else{
                              buffer2[counter]=buffer[n];
@@ -72,7 +75,12 @@ int main(){
                         }
                          
                     }
-
+                   if(n>0){
+                       spaces=true;
+                       if(buffer[n]<33 && buffer[n-1]<33) spaces=false;
+                   }else{
+                       spaces=true;
+                   }
                    if(buffer[n]==retssimbol){
                         
                         closesb=false;
@@ -88,7 +96,7 @@ int main(){
                     }
 
                 counter++;
-                if(closesb && bbb && buffer[n]!=retssimbol2) printf("%c",buffer[n]);
+                if(closesb && bbb && buffer[n]!=retssimbol2 && spaces) printf("%c",buffer[n]);
             }
         }
         
