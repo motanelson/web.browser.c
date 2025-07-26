@@ -6,6 +6,8 @@
 #define sizes 4096
 #define body1 "<BODY"
 #define body2 "<body"
+#define script1 "<SCRIPT"
+#define script2 "<script"
 #define retssimbol '<'
 #define retssimbol2 '>'
 int main(){
@@ -17,6 +19,7 @@ int main(){
     int n=0;
     int b= true;
     int bb=false;
+    int bbb=false;
     int closesb=false;
     int rect=false;
     printf("\033c\033[43;30m\n\n");
@@ -33,6 +36,8 @@ int main(){
                              if(strncmp(buffer2,body1,5)==0 ||strncmp(buffer2,body2,5)==0 ){
                                  bb=true;
                                  closesb=false;
+                                 counter=0;
+                                 bbb=false;
                              }
                         }else{
                              buffer2[counter]=buffer[n];
@@ -45,6 +50,21 @@ int main(){
                     }
                 counter++;
             }else{
+                   if(counter<6){
+                        if(counter==5){
+                             buffer2[counter]=buffer[n];
+                             if(strncmp(buffer2,script1,5)==0 ||strncmp(buffer2,script1,5)==0 ){
+                                 bbb=true;
+                                 
+                             }
+                        }else{
+                             buffer2[counter]=buffer[n];
+                        }
+                         
+                    }else{
+                            bbb=true;
+                        } 
+
                    if(buffer[n]==retssimbol){
                         
                         closesb=false;
@@ -55,8 +75,8 @@ int main(){
                     }
 
                 
-
-                if(closesb) printf("%c",buffer[n]);
+                counter++;
+                if(closesb && bbb) printf("%c",buffer[n]);
             }
         }
         
