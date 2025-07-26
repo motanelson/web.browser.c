@@ -10,6 +10,12 @@
 #define script2 "<script"
 #define script3 "</SCRIPT"
 #define script4 "</script"
+#define br1 "<BR"
+#define br2 "<br"
+#define p1 "<P"
+#define p2 "<p"
+#define pe1 "</P"
+#define pe2 "</p"
 #define retssimbol '<'
 #define retssimbol2 '>'
 #define sp ' '
@@ -56,16 +62,31 @@ int main(){
                 counter++;
             }else{
                    if(counter<9){
+                        if(counter==3){
+                             buffer2[counter]=buffer[n];
+                             if(strncmp(buffer2,br1,3)==0 ||strncmp(buffer2,br2,3)==0 ||strncmp(buffer2,pe1,3)==0 ||strncmp(buffer2,pe2,3)==0){
+                                 printf("\n");
+                                 
+                             }
+                         }
+                         if(counter==2){
+                             buffer2[counter]=buffer[n];
+                             if(strncmp(buffer2,p1,2)==0 ||strncmp(buffer2,p2,2)==0 ){
+                                 printf("\n");
+                                 
+                             }
+                         }
+
                         if(counter==7){
                              buffer2[counter]=buffer[n];
-                             if(strncmp(buffer2,script1,5)==0 ||strncmp(buffer2,script2,5)==0 ){
+                             if(strncmp(buffer2,script1,7)==0 ||strncmp(buffer2,script2,7)==0 ){
                                  bbb=false;
                                  
                              }
                          }
                         if(counter==8){
                              buffer2[counter]=buffer[n];
-                             if(strncmp(buffer2,script3,5)==0 ||strncmp(buffer2,script4,5)==0 ){
+                             if(strncmp(buffer2,script3,8)==0 ||strncmp(buffer2,script4,8)==0 ){
                                  bbb=true;
                                  
                              }
