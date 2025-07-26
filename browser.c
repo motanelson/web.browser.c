@@ -8,6 +8,8 @@
 #define body2 "<body"
 #define script1 "<SCRIPT"
 #define script2 "<script"
+#define script3 "</SCRIPT"
+#define script4 "</script"
 #define retssimbol '<'
 #define retssimbol2 '>'
 int main(){
@@ -37,7 +39,7 @@ int main(){
                                  bb=true;
                                  closesb=false;
                                  counter=0;
-                                 bbb=false;
+                                 bbb=true;
                              }
                         }else{
                              buffer2[counter]=buffer[n];
@@ -50,20 +52,26 @@ int main(){
                     }
                 counter++;
             }else{
-                   if(counter<6){
-                        if(counter==5){
+                   if(counter<9){
+                        if(counter==7){
                              buffer2[counter]=buffer[n];
-                             if(strncmp(buffer2,script1,5)==0 ||strncmp(buffer2,script1,5)==0 ){
+                             if(strncmp(buffer2,script1,5)==0 ||strncmp(buffer2,script2,5)==0 ){
+                                 bbb=false;
+                                 
+                             }
+                         }
+                        if(counter==8){
+                             buffer2[counter]=buffer[n];
+                             if(strncmp(buffer2,script3,5)==0 ||strncmp(buffer2,script4,5)==0 ){
                                  bbb=true;
                                  
                              }
+
                         }else{
                              buffer2[counter]=buffer[n];
                         }
                          
-                    }else{
-                            bbb=true;
-                        } 
+                    }
 
                    if(buffer[n]==retssimbol){
                         
@@ -74,9 +82,13 @@ int main(){
                         closesb=true;
                     }
 
-                
+                    if(buffer[n]==retssimbol){
+                        
+                        counter=0;
+                    }
+
                 counter++;
-                if(closesb && bbb) printf("%c",buffer[n]);
+                if(closesb && bbb && buffer[n]!=retssimbol2) printf("%c",buffer[n]);
             }
         }
         
